@@ -1,10 +1,14 @@
 {
   description = "Achieve nirvana through automatically following all flake inputs.";
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    flake-compat.url = "git+https://git.lix.systems/lix-project/flake-compat";
+  };
 
   outputs = {
     self,
     nixpkgs,
+    ...
   }: let
     supportedSystems = ["x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin"];
     forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
